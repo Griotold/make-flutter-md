@@ -121,6 +121,7 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
 
 ## 6. 이 프로젝트 고유
 
+- **패키지명:** {{PACKAGE_NAME}}
 - **컨셉:** {{CONCEPT_PLACEHOLDER}}
 - **타겟 플랫폼 예외:** 없음 (iOS only)
 - **하드 룰:** (brainstorming 후 채워짐)
