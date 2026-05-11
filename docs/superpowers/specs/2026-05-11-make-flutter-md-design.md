@@ -13,6 +13,10 @@ hemille가 Flutter로 게임/유틸 앱을 여러 개 만들면서 반복되는 
 2. **축적된 학습 박제** — 여러 프로젝트를 거치며 얻은 검증된 패턴(iOS 26 release-only, `integration_test` 우회법, AdMob 한국 IDFA 등)을 한곳에 모아 잊지 않고 재사용.
 3. **신규 프로젝트 부트스트랩 가속** — 새 Flutter 앱 시작할 때 폴더 구조/CLAUDE.md/디렉터리 셋업까지 손으로 안 하고 Claude가 자동으로.
 
+### 1.1 사용자 배경 (워크플로우 가정)
+
+앞으로 만드는 앱은 **본인이 0에서 아이디어를 내지 않는다**. Claude Code가 제안하거나, 마켓에 출시된 앱을 살짝 비트는 방향으로 진행한다. 이 워크플로우에는 함정이 있다 — **본인(hemille)이 본인 앱의 사용법을 모를 수 있다**. 이 상황을 정상화하기 위해 모든 신규 앱에 **인앱 튜토리얼**을 표준 기능으로 강제한다 (§4.2, §5.6 참조).
+
 ## 2. 사용 흐름
 
 사람이 하는 일은 두 줄 + 한 마디뿐:
@@ -46,7 +50,8 @@ make-flutter-md/                          (public GitHub repo)
 │   ├── integration-test.md
 │   ├── hive-ce-patterns.md
 │   ├── firebase-setup.md
-│   └── monetization.md
+│   ├── monetization.md
+│   └── onboarding-tutorial.md             # 표준 기능: Gemini 영상 인앱 튜토리얼
 │
 └── docs/                                  # 이 레포 자체의 메타 문서
     └── superpowers/
@@ -75,15 +80,20 @@ README.md는 두 청중을 동시에 대응:
 
 ### 4.2 CLAUDE.md 템플릿 (Step 4에서 복사할 인라인 내용)
 
-다음 5개 섹션 포함:
+다음 6개 섹션 포함:
 
 1. **플랫폼 / 빌드** — iOS only, `--release` 강제, 실기기 설치 명령
 2. **기술 스택** — Riverpod, `hive_ce`, GoRouter(조건부), Firebase(조건부)
 3. **작업 컨벤션** — main 직접 작업, `git add .` 전체 스테이징, `docs/superpowers/` 워크플로우
-4. **Learnings 참조 표** — 각 learning의 raw GitHub URL (Claude가 필요 시 WebFetch)
-5. **프로젝트 고유** — 컨셉/하드 룰/활성 플랜 (brainstorming 후 채워질 빈칸)
+4. **표준 기능 (모든 앱 공통)** — 이 레포가 정의하는 신규 앱 필수 기능. v1에는 다음 1개:
+   - **인앱 튜토리얼** (영상 형식, Gemini API로 빌드 타임 생성, `assets/tutorial/`에 번들)
+   - 첫 실행 시 자동 재생 + 설정/메인의 ⓘ 버튼에서 언제든 재생
+   - `hive_ce`에 `tutorial_seen` 플래그 저장, 스킵 가능하되 "다시 보기" 진입점 필수
+   - 자세한 패턴은 `learnings/onboarding-tutorial.md` 참조
+5. **Learnings 참조 표** — 각 learning의 raw GitHub URL (Claude가 필요 시 WebFetch)
+6. **프로젝트 고유** — 컨셉/하드 룰/활성 플랜 (brainstorming 후 채워질 빈칸)
 
-## 5. learnings/ 5개 파일 스코프
+## 5. learnings/ 6개 파일 스코프
 
 각 파일은 1–3KB 목표. "왜"와 "정확한 명령" 위주, 일반 Flutter 튜토리얼 내용은 제외.
 
@@ -131,6 +141,22 @@ README.md는 두 청중을 동시에 대응:
   - "Remove Ads 구매 시 진짜 광고 사라짐"
 - Restore Purchase 플로우 (App Store 필수)
 
+### 5.6 `learnings/onboarding-tutorial.md`
+
+- **배경:** §1.1의 워크플로우 가정 — 본인이 본인 앱 사용법을 모를 수 있음. 본인 + 일반 사용자 모두를 위한 표준 기능.
+- **표시 시점:**
+  - 첫 실행 시 자동 (`hive_ce`의 `app_settings` 박스에 `tutorial_seen: bool`)
+  - 설정 또는 메인 화면의 ⓘ 버튼에서 언제든 재생 (재시청 진입점 *필수*)
+- **포맷:** 짧은 영상 (30~90초). 음성 내레이션 + 자막 + 핵심 화면 캡처/일러스트.
+- **생성 파이프라인:** Gemini API로 **빌드 타임에 사전 생성** (런타임 생성 금지 — 사용자 대기 시간/네트워크/비용 문제). 결과물을 `assets/tutorial/{lang}.mp4` 로 번들. `tool/` 디렉터리에 생성 스크립트 (`dart run tool/build_tutorial.dart`) 보관.
+- **재생 패키지:** `video_player` + `chewie` (재생 컨트롤 UI). `pubspec.yaml`에 추가.
+- **언어:** 디바이스 로케일에 따라 `ko.mp4` / `en.mp4` 분기. 영어 없으면 한국어 폴백.
+- **하드 룰:**
+  - 스킵 가능 (Skip 버튼 항상 노출).
+  - "다시 보기" 진입점이 1~2탭 내 접근 가능해야 함.
+  - 튜토리얼 자체에 광고 절대 없음.
+- **결정 보류 (플랜에서 정리):** Gemini API의 어느 모달리티 사용할지 (Veo로 영상 직접 생성 vs 멀티 이미지 + TTS 합성). 두 옵션 다 검토 후 v1엔 단순한 쪽 선택.
+
 ## 6. 사용자 글로벌 `~/.claude/CLAUDE.md` 추가 내용
 
 이 디자인이 동작하려면 사용자 글로벌 CLAUDE.md에 다음 섹션이 추가되어야 함 (평생 한 번 셋업):
@@ -174,6 +200,7 @@ README.md는 두 청중을 동시에 대응:
 
 1. README.md가 GitHub에서 raw URL로 fetch 가능.
 2. 빈 디렉터리에서 (시뮬레이션 또는 실제) `mkdir foo && cd foo && claude` → "테스트용 앱 만들자"라고 했을 때 Step 1~6이 의도대로 실행됨.
-3. 생성된 새 프로젝트의 CLAUDE.md가 5개 섹션 모두 갖춤 + learnings URL 표 정확.
-4. 5개 learning 파일 모두 작성됨 + 인덱스/템플릿 표에 모두 연결.
+3. 생성된 새 프로젝트의 CLAUDE.md가 6개 섹션 모두 갖춤 + learnings URL 표 정확.
+4. 6개 learning 파일 모두 작성됨 + 인덱스/템플릿 표에 모두 연결.
 5. 사용자 글로벌 `~/.claude/CLAUDE.md`에 트리거 추가됨.
+6. CLAUDE.md 템플릿의 §4 "표준 기능"이 인앱 튜토리얼을 명시하고, `learnings/onboarding-tutorial.md`로 정확히 연결됨.
