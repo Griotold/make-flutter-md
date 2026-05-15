@@ -112,7 +112,16 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
 - Material 3 디폴트 `ThemeData` 그대로 출시 금지 — 컨셉 반영한 컬러/타이포 필수.
 - 자세한 패턴: [design-tools.md](https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/design-tools.md)
 
-## 5. 표준 기능 (모든 앱 공통)
+## 5. 오디오 (모든 앱 공통)
+
+- 모든 사운드 = iOS **`ambient` 카테고리 + `mixWithOthers: true`** (`audio_session` 패키지로 앱 시작 시 1회 등록). `playback` 사용 금지.
+- 무음 모드 → 게임 무음. 다른 앱 음악(유튜브 등) 재생 중 → 게임 BGM 자동 mute, 효과음은 mix되어 작게.
+- 설정 화면 토글 **3개 별도**: `bgm_enabled` / `sfx_enabled` / `haptic_enabled` (`hive_ce` `app_settings` 박스, 기본 `true`).
+- 햅틱은 무음 스위치와 무관 — 별도 게이트.
+- 첫 빌드 전 실기기에서 (a) 무음 모드 (b) 유튜브 동시 재생 두 시나리오 검수 필수.
+- 자세한 패턴: [audio-policy.md](https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/audio-policy.md)
+
+## 6. 표준 기능 (모든 앱 공통)
 
 - **인앱 튜토리얼** — 3~4장 카드 캐러셀, 각 카드 = 비주얼 + 설명 텍스트
 - **이미지 필수, 영상 선택** (모션이 정보일 때만 image-to-video)
@@ -123,7 +132,7 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
 - `hive_ce` `app_settings` 박스의 `tutorial_seen` 플래그로 첫 실행 감지
 - 자세한 패턴: [onboarding-tutorial.md](https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/onboarding-tutorial.md)
 
-## 6. Learnings 참조 (필요 시 WebFetch)
+## 7. Learnings 참조 (필요 시 WebFetch)
 
 | 주제 | URL |
 |---|---|
@@ -134,8 +143,9 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
 | 수익화 (광고/IAP) | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/monetization.md |
 | 인앱 튜토리얼 | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/onboarding-tutorial.md |
 | 디자인 도구 (Stitch + Nano Banana) | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/design-tools.md |
+| 오디오 정책 (BGM + 효과음) | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/audio-policy.md |
 
-## 7. 이 프로젝트 고유
+## 8. 이 프로젝트 고유
 
 - **패키지명:** {{PACKAGE_NAME}}
 - **컨셉:** {{CONCEPT_PLACEHOLDER}}
@@ -157,6 +167,7 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
 | [monetization.md](./learnings/monetization.md) | AdMob 한국 IDFA, in_app_purchase 패턴, "성역" 룰 |
 | [onboarding-tutorial.md](./learnings/onboarding-tutorial.md) | 카드 캐러셀 + Nano Banana + 모션 옵트인 |
 | [design-tools.md](./learnings/design-tools.md) | Stitch (디자인 시스템/화면 시안) + Nano Banana (아이콘/스플래시/일러스트) |
+| [audio-policy.md](./learnings/audio-policy.md) | `ambient + mixWithOthers`, 무음/유튜브 시나리오, BGM/효과음/햅틱 토글 분리 |
 
 ---
 
