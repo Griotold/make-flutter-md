@@ -36,12 +36,15 @@ flutter create . --project-name <package_name> --platforms=ios --org com.hemille
 ### Step 3: 컨벤션 디렉터리 구조 생성
 
 ```bash
-mkdir -p docs/superpowers/specs docs/superpowers/plans docs/solutions docs/ideas
+mkdir -p docs/superpowers/specs docs/superpowers/plans docs/solutions docs/ideas docs/design
 touch docs/superpowers/specs/.gitkeep \
       docs/superpowers/plans/.gitkeep \
       docs/solutions/.gitkeep \
-      docs/ideas/.gitkeep
+      docs/ideas/.gitkeep \
+      docs/design/.gitkeep
 ```
+
+- `docs/design/`은 brainstorming 직후 `DESIGN.md`(컬러/타이포/톤 source of truth) 작성용. 자세한 건 `learnings/design-tools.md`.
 
 ### Step 4: 루트에 CLAUDE.md 작성
 
@@ -101,7 +104,15 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
   - Solution: `docs/solutions/`
 - 워크플로우: `brainstorming` → `writing-plans` → 실행 → `ce:review`
 
-## 4. 표준 기능 (모든 앱 공통)
+## 4. 디자인 (모든 앱 공통)
+
+- **첫 화면 구현 전에 `docs/design/DESIGN.md` 작성** — 컨셉/컬러/타이포/분위기 source of truth.
+- **Stitch** (`stitch-mcp` MCP)로 design system + 핵심 화면 시안 2~3개 생성 → 사용자 승인 → Flutter 손번역.
+- 이미지 에셋(아이콘/스플래시/일러스트)은 **Nano Banana** 빌드 타임 생성. 런타임 생성 금지.
+- Material 3 디폴트 `ThemeData` 그대로 출시 금지 — 컨셉 반영한 컬러/타이포 필수.
+- 자세한 패턴: [design-tools.md](https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/design-tools.md)
+
+## 5. 표준 기능 (모든 앱 공통)
 
 - **인앱 튜토리얼** — 3~4장 카드 캐러셀, 각 카드 = 비주얼 + 설명 텍스트
 - **이미지 필수, 영상 선택** (모션이 정보일 때만 image-to-video)
@@ -112,7 +123,7 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
 - `hive_ce` `app_settings` 박스의 `tutorial_seen` 플래그로 첫 실행 감지
 - 자세한 패턴: [onboarding-tutorial.md](https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/onboarding-tutorial.md)
 
-## 5. Learnings 참조 (필요 시 WebFetch)
+## 6. Learnings 참조 (필요 시 WebFetch)
 
 | 주제 | URL |
 |---|---|
@@ -122,8 +133,9 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
 | Firebase 셋업 | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/firebase-setup.md |
 | 수익화 (광고/IAP) | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/monetization.md |
 | 인앱 튜토리얼 | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/onboarding-tutorial.md |
+| 디자인 도구 (Stitch + Nano Banana) | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/design-tools.md |
 
-## 6. 이 프로젝트 고유
+## 7. 이 프로젝트 고유
 
 - **패키지명:** {{PACKAGE_NAME}}
 - **컨셉:** {{CONCEPT_PLACEHOLDER}}
@@ -144,6 +156,7 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
 | [firebase-setup.md](./learnings/firebase-setup.md) | flutterfire 셋업, firestore.rules 패턴, Auth anonymous |
 | [monetization.md](./learnings/monetization.md) | AdMob 한국 IDFA, in_app_purchase 패턴, "성역" 룰 |
 | [onboarding-tutorial.md](./learnings/onboarding-tutorial.md) | 카드 캐러셀 + Nano Banana + 모션 옵트인 |
+| [design-tools.md](./learnings/design-tools.md) | Stitch (디자인 시스템/화면 시안) + Nano Banana (아이콘/스플래시/일러스트) |
 
 ---
 
