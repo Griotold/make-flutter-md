@@ -533,7 +533,7 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
 
 {{CONCEPT_PLACEHOLDER}}
 
-> 📚 이 프로젝트는 https://github.com/hemille/make-flutter-md 의 규칙을 따른다.
+> 📚 이 프로젝트는 https://github.com/Griotold/make-flutter-md 의 규칙을 따른다.
 > 핵심 규칙은 아래 인라인. 깊은 주제는 learnings 표 참조.
 
 ## 1. 플랫폼 / 빌드
@@ -568,18 +568,18 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
 - 텍스트는 Flutter UI 레이어(다국어 분리, 비주얼은 언어 무관)
 - 첫 실행 자동 재생 + ⓘ 버튼에서 언제든 재생
 - `hive_ce` `app_settings` 박스의 `tutorial_seen` 플래그로 첫 실행 감지
-- 자세한 패턴: [onboarding-tutorial.md](https://raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/onboarding-tutorial.md)
+- 자세한 패턴: [onboarding-tutorial.md](https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/onboarding-tutorial.md)
 
 ## 5. Learnings 참조 (필요 시 WebFetch)
 
 | 주제 | URL |
 |---|---|
-| iOS 빌드 | https://raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/ios-build.md |
-| integration_test 우회 | https://raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/integration-test.md |
-| hive_ce 패턴 | https://raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/hive-ce-patterns.md |
-| Firebase 셋업 | https://raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/firebase-setup.md |
-| 수익화 (광고/IAP) | https://raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/monetization.md |
-| 인앱 튜토리얼 | https://raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/onboarding-tutorial.md |
+| iOS 빌드 | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/ios-build.md |
+| integration_test 우회 | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/integration-test.md |
+| hive_ce 패턴 | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/hive-ce-patterns.md |
+| Firebase 셋업 | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/firebase-setup.md |
+| 수익화 (광고/IAP) | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/monetization.md |
+| 인앱 튜토리얼 | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/onboarding-tutorial.md |
 
 ## 6. 이 프로젝트 고유
 
@@ -626,7 +626,7 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
   grep '{{PROJECT_NAME}}' README.md
   grep '{{PACKAGE_NAME}}' README.md
   grep '{{CONCEPT_PLACEHOLDER}}' README.md
-  grep -c 'raw.githubusercontent.com/hemille/make-flutter-md' README.md
+  grep -c 'raw.githubusercontent.com/Griotold/make-flutter-md' README.md
   ```
   Expected: 5500~10000 bytes, ≥5 H2 sections, all 3 placeholders present, ≥7 raw URL references (6 learnings + 1 template repo link).
 
@@ -674,7 +674,7 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
   ```bash
   for f in learnings/*.md; do
     base=$(basename "$f")
-    if ! grep -q "raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/$base" README.md; then
+    if ! grep -q "raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/$base" README.md; then
       echo "MISSING in template §5: $base"
     fi
   done
@@ -714,7 +714,7 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
   - 다르면 README.md의 raw URL과 CLAUDE.md 템플릿의 URL을 모두 새 username으로 교체 후 커밋.
 
 - [ ] **Step 2:** Confirm repo creation method with user. Offer two options:
-  - (a) Claude가 `gh repo create hemille/make-flutter-md --public --source=. --push` 실행
+  - (a) Claude가 `gh repo create Griotold/make-flutter-md --public --source=. --push` 실행
   - (b) 사용자가 직접 GitHub 웹에서 빈 repo 만든 다음, Claude가 `git remote add origin ...` + `git push -u origin main`
 
 - [ ] **Step 3:** Execute chosen method.
@@ -722,7 +722,7 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
 - [ ] **Step 4:** Verify raw URL actually resolves (이게 디자인 검증의 핵심):
   ```bash
   curl -sf -o /dev/null -w '%{http_code}\n' \
-    https://raw.githubusercontent.com/hemille/make-flutter-md/main/README.md
+    https://raw.githubusercontent.com/Griotold/make-flutter-md/main/README.md
   ```
   Expected: `200`.
 
@@ -730,7 +730,7 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
   ```bash
   for f in ios-build integration-test hive-ce-patterns firebase-setup monetization onboarding-tutorial; do
     code=$(curl -sf -o /dev/null -w '%{http_code}' \
-      https://raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/$f.md)
+      https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/$f.md)
     echo "$f.md: $code"
   done
   ```
@@ -752,7 +752,7 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
 
   빈/거의 빈 디렉터리에서 Flutter 앱 새로 만들자는 요청을 받으면:
 
-  1. 먼저 https://raw.githubusercontent.com/hemille/make-flutter-md/main/README.md
+  1. 먼저 https://raw.githubusercontent.com/Griotold/make-flutter-md/main/README.md
      를 WebFetch로 읽는다.
   2. 거기 적힌 부트스트랩 절차(Step 1~6)를 그대로 따른다.
   3. 절차에는 CLAUDE.md 템플릿 + 디렉터리 구조 + brainstorming 진입까지 포함.

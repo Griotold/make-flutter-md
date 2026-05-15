@@ -71,7 +71,7 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
 
 {{CONCEPT_PLACEHOLDER}}
 
-> 📚 이 프로젝트는 https://github.com/hemille/make-flutter-md 의 규칙을 따른다.
+> 📚 이 프로젝트는 https://github.com/Griotold/make-flutter-md 의 규칙을 따른다.
 > 핵심 규칙은 아래 인라인. 깊은 주제는 learnings 표 참조.
 
 ## 1. 플랫폼 / 빌드
@@ -106,18 +106,18 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
 - 텍스트는 Flutter UI 레이어(다국어 분리, 비주얼은 언어 무관)
 - 첫 실행 자동 재생 + ⓘ 버튼에서 언제든 재생
 - `hive_ce` `app_settings` 박스의 `tutorial_seen` 플래그로 첫 실행 감지
-- 자세한 패턴: [onboarding-tutorial.md](https://raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/onboarding-tutorial.md)
+- 자세한 패턴: [onboarding-tutorial.md](https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/onboarding-tutorial.md)
 
 ## 5. Learnings 참조 (필요 시 WebFetch)
 
 | 주제 | URL |
 |---|---|
-| iOS 빌드 | https://raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/ios-build.md |
-| integration_test 우회 | https://raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/integration-test.md |
-| hive_ce 패턴 | https://raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/hive-ce-patterns.md |
-| Firebase 셋업 | https://raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/firebase-setup.md |
-| 수익화 (광고/IAP) | https://raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/monetization.md |
-| 인앱 튜토리얼 | https://raw.githubusercontent.com/hemille/make-flutter-md/main/learnings/onboarding-tutorial.md |
+| iOS 빌드 | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/ios-build.md |
+| integration_test 우회 | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/integration-test.md |
+| hive_ce 패턴 | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/hive-ce-patterns.md |
+| Firebase 셋업 | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/firebase-setup.md |
+| 수익화 (광고/IAP) | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/monetization.md |
+| 인앱 튜토리얼 | https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/onboarding-tutorial.md |
 
 ## 6. 이 프로젝트 고유
 

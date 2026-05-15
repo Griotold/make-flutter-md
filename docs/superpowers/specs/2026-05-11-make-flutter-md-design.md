@@ -33,7 +33,7 @@ claude
 Claude Code가 자동으로 하는 일:
 
 1. 사용자 글로벌 `~/.claude/CLAUDE.md`가 세션 시작 시 자동 로드됨 — 거기에 "빈 디렉터리에서 Flutter 앱 만들자는 요청 → make-flutter-md README WebFetch" 트리거가 박혀있음.
-2. 트리거 매치 → `https://raw.githubusercontent.com/hemille/make-flutter-md/main/README.md` WebFetch.
+2. 트리거 매치 → `https://raw.githubusercontent.com/Griotold/make-flutter-md/main/README.md` WebFetch.
 3. README의 "Claude Code 부트스트랩 절차" 섹션대로 실행 (flutter create → 디렉터리 생성 → CLAUDE.md 작성 → git init).
 4. 끝나면 사용자에게 "셋업 완료" 알리고 `superpowers:brainstorming` skill 진입.
 5. 개발 도중 특정 주제 필요 시 (예: `hive_ce` 패턴) 해당 `learnings/*.md`를 WebFetch.
@@ -199,7 +199,7 @@ README.md는 두 청중을 동시에 대응:
 
 빈/거의 빈 디렉터리에서 Flutter 앱 새로 만들자는 요청을 받으면:
 
-1. 먼저 https://raw.githubusercontent.com/hemille/make-flutter-md/main/README.md
+1. 먼저 https://raw.githubusercontent.com/Griotold/make-flutter-md/main/README.md
    를 WebFetch로 읽는다.
 2. 거기 적힌 부트스트랩 절차를 그대로 따른다.
 3. 절차에는 CLAUDE.md 템플릿 + 디렉터리 구조 + brainstorming 진입까지 포함.
