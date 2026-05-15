@@ -84,8 +84,11 @@ git commit -m "초기 부트스트랩 (make-flutter-md 따름)"
 ## 1. 플랫폼 / 빌드
 
 - iOS only, `--release` 강제 (iOS 26+ 정책)
+- **빌드/설치는 Claude Code가 Bash로 직접 실행** (사용자한테 떠넘기지 않음). 5~10분 걸리므로 `run_in_background: true`.
+- 빌드 직전 사전 체크: `flutter devices`로 타겟 확인 + 사용자에게 "iPhone 잠금 해제하고 화면 켜두세요" 한 줄 안내 (USB/Wi-Fi 무관, `devicectl`이 developer disk image 마운트 시 잠금 해제 필수).
 - 실기기 설치: `flutter build ios --release && flutter install --release --device-timeout 15`
 - `--debug` / `flutter run --release` 사용 금지 (터미널 블로킹)
+- 빌드 실패 시 흔한 분기(잠금/사인/Pod/타임아웃)와 복구 패턴은 [ios-build.md](https://raw.githubusercontent.com/Griotold/make-flutter-md/main/learnings/ios-build.md) 참조.
 
 ## 2. 기술 스택
 
